@@ -8,6 +8,7 @@ ENV GRAALVM_FILENAME $GRAALVM_FOLDER.tar.gz
 RUN apt-get update \
   && apt-get install -y wget
 RUN wget -qO- https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/$GRAALVM_FILENAME | tar -xvz
-ENV GRAALVM_HOME /$GRAALVM_FOLDER
+ENV GRAALVM_HOME /graalvm-ce-java11-${GRAALVM_VERSION}
 ENV JAVA_HOME $GRAALVM_HOME
 ENV PATH $GRAALVM_HOME/bin:$JAVA_HOME:$PATH
+RUN chmod -R g+rw $GRAALVM_HOME && gu install native-image
